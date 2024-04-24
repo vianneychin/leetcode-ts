@@ -1,5 +1,5 @@
 const matchingBrackets: Record<string, string> = {
-jk    ")": "(",
+    ")": "(",
     "}": "{",
     "]": "[",
 };
@@ -20,7 +20,7 @@ function isValid(s: string): boolean {
             stack.push(bracket);
         }
     }
-jk
+
     return stack.length === 0;
 }
 
