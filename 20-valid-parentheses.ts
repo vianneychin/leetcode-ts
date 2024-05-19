@@ -5,24 +5,24 @@ const matchingBrackets: Record<string, string> = {
 };
 
 function isValid(s: string): boolean {
-    let stack: string[] = [];
+    let openBracketsStack: string[] = [];
     for (let i = 0; i <= s.length - 1; i++) {
-        let bracket = s[i];
-        if (matchingBrackets[bracket]) {
-            const previousItemAddedToTheStack = stack[stack.length - 1];
-            if (stack.length > 0 && previousItemAddedToTheStack === matchingBrackets[bracket]) {
-                stack.pop();
+        if (matchingBrackets[s[i]]) {
+            if (matchingBrackets[s[i]] === openBracketsStack[openBracketsStack.length - 1]) {
+                openBracketsStack.pop();
             } else {
                 return false;
             }
         } else {
-            stack.push(bracket);
+            openBracketsStack.push(s[i]);
         }
     }
-
-    return stack.length === 0;
+    return openBracketsStack.length === 0;
 }
 
-isValid("(}{)");
-isValid("{}()[]");
-isValid("([)]");
+isValid("({{{{}}}))"); // false
+isValid("]"); // false
+isValid("(}{)"); // false
+isValid("{}()[]"); // true
+isValid("([)]"); // false
+isValid("({[]})"); // true
